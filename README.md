@@ -5,37 +5,41 @@ A Python script to export your Steam wishlist.
 Only tested on Linux.
 
 # Usage
-* Download the script `steam_wishlist.py` and run it with a recent version of Python 3. 
-* Supply your 17 digit [SteamID](https://help.steampowered.com/en/faqs/view/2816-BE67-5B69-0FEC) ([Tool](https://steamdb.info/calculator/)):
 
-``` shell
+- Download the script `steam_wishlist.py` and run it with a recent version of Python 3.
+- Supply your 17 digit [SteamID](https://help.steampowered.com/en/faqs/view/2816-BE67-5B69-0FEC) ([Tool](https://steamdb.info/calculator/)):
+
+```shell
 python3 steam_wishlist.py <steamID>
 ```
 
 # Private wishlist
-If your wishlist is private, you'll have to take a few extra steps:
-* Log in to your Steam account with your browser.
-* Copy the value of the `steamLoginSecure` cookie. This value is a long string starting with `76561198` followed by a lot of random letters and numbers.
-* Supply the value of that cookie to `steam_wishlist.py` with the `-c` parameter:
 
-``` shell
+If your wishlist is private, you'll have to take a few extra steps:
+
+- Log in to your Steam account with your browser.
+- Copy the value of the `steamLoginSecure` cookie. This value is a long string starting with `76561198` followed by a lot of random letters and numbers.
+- Supply the value of that cookie to `steam_wishlist.py` with the `-c` parameter:
+
+```shell
 python3 steam_wishlist.py -c <steamLoginSecure cookie> <steamID>
 ```
 
-The `steamLoginSecure` cookie regularly expires/changes, so you'll have to repeat this process every time you run steam_wislist.py. 
+The `steamLoginSecure` cookie regularly expires/changes, so you'll have to repeat this process every time you run steam_wislist.py.
 **Never share or publish your `steamLoginSecure` cookie!**
 
 # Output
+
 The wishlist is written to stdout. By default `steam_wishlist.py` will output JSON. Use the `--csv` option to have it output [CSV](https://en.wikipedia.org/wiki/Comma-separated_values)
 instead. The default separator for CSV is TAB and can be changed with the `-s/--separator` option. The `-f/--fields` argument can be used to specify which fields to output. For example:
 
-``` shell
+```shell
 python3 steam_wishlist.py <steamID> --csv -f gameid,type,name
 ```
 
 Example output:
 
-``` text
+```text
 581300  Game    Black Mirror
 582890  Game    Estranged: The Departure
 865670  DLC     Prey - Mooncras
@@ -45,11 +49,11 @@ Example output:
 
 # Full help (steam_wislisht.py -h)
 
-``` text
+```text
 usage: steam_wishlist.py [-h] [-c <cookie>] [-q] [-j | -t] [-f FIELDS] [-s SEPARATOR] [--quote {never,minimal,always}] [--sort <field>] [--num] [--reverse]
-                         [--save <file> | --load <file>] [-p {linux,win,mac}] [--free] [--no-free] [--released] [--no-released] [--early] [--no-early]
-                         [--type {game,dlc,mod,demo,application,music}] [--tag TAG] [--deck <int>] [--prices <country code>] [--refresh] [--discount <int>]
-                         [--price <int>]
+                         [--save <file> | --load <file>] [-p {linux,win,mac}] [--free] [--no-free] [--demo] [--achievements] [--cards] [--released] [--no-released]
+                         [--early] [--no-early] [--type {game,dlc,mod,demo,application,music}] [--tag TAG] [--deck <int>] [--prices <country code>] [--refresh]
+                         [--discount <int>] [--price <int>]
                          [<userid>]
 
 Export your Steam wishlist
@@ -83,6 +87,9 @@ filters:
                         supported platform (linux, win or mac). Can be repeated for multiple platforms
   --free                free games only
   --no-free             non-free games only
+  --demo                games with demos only
+  --achievements        games with achievements only
+  --cards               games with trading cards only
   --released            released games only
   --no-released         unreleased games only
   --early               early access games only
@@ -114,6 +121,3 @@ Additional provided fields for CSV output:
 Additional fields when using --prices to get price information:
     initial, final, discount_percent, initial_formatted, final_formatted, currency
 ```
-
-
-
