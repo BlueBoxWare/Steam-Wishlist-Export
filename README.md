@@ -1,3 +1,6 @@
+| :exclamation: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Currently broken! &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+
 A Python script to export your Steam wishlist.
 
 > :warning: Provided as-is, use at your own risk.
