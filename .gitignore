@@ -1,2 +1,6 @@
 .mypy_cache/
+.ruff_cache/
+stuff/
+pyproject.toml
+.steam_wishlist.cache
 
