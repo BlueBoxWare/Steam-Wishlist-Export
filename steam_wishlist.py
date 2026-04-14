@@ -21,7 +21,6 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, TextIO
 
-RENAME = {"steam_release_date": "release_date", "is_free": "free"}
 BACKOFF = [5, 20, 60, 2 * 60, 10 * 60, 30 * 60]
 
 LANGUAGES = {
@@ -56,6 +55,8 @@ LANGUAGES = {
     "uk": "ukrainian",
     "vi": "vietnamese",
 }
+
+RENAME = {"steam_release_date": "release_date", "is_free": "free"}
 
 default_country = "<unknown>"
 try:
@@ -262,6 +263,11 @@ group_filters.add_argument(
 group_filters.add_argument(
     "--cards",
     help="Games with trading cards only",
+    action="store_true",
+)
+group_filters.add_argument(
+    "--gfn",
+    help="Games on GeForce NOW which are playable through Steam",
     action="store_true",
 )
 group_filters.add_argument(
@@ -856,6 +862,8 @@ if args.cards:
     to_load.append("cards")
 if args.achievements:
     to_load.append("achievements")
+if args.gfn:
+    to_load.append("gfn")
 
 if args.extract_only:
     to_load = []
