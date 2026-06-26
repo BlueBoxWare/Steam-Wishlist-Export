@@ -56,8 +56,6 @@ LANGUAGES = {
     "vi": "vietnamese",
 }
 
-RENAME = {"steam_release_date": "release_date", "is_free": "free"}
-
 default_country = "<unknown>"
 try:
     default_country = locale.getdefaultlocale()[0].split("_")[1].lower()  # pyright: ignore [reportOptionalMemberAccess]
@@ -265,11 +263,11 @@ group_filters.add_argument(
     help="Games with trading cards only",
     action="store_true",
 )
-group_filters.add_argument(
-    "--gfn",
-    help="Games on GeForce NOW which are playable through Steam",
-    action="store_true",
-)
+# group_filters.add_argument(
+#     "--gfn",
+#     help="Games on GeForce NOW which are playable through Steam",
+#     action="store_true",
+# )
 group_filters.add_argument(
     "--released",
     help="Released games only",
@@ -551,9 +549,11 @@ def fetch_app_info(appid: int) -> dict:
     response = None
     url = f"https://store.steampowered.com/api/appdetails/?cc={args.country}&l={args.lang}&appids={appid}"
     req = request(url)
+    text = ""
     while retry < len(BACKOFF):
         try:
             response = urllib.request.urlopen(req)
+            text = response.read()
             break
         except Exception:
             progress(" Error fetching.\nRetry")
@@ -569,7 +569,6 @@ def fetch_app_info(appid: int) -> dict:
 
     sleep()
 
-    text = response.read()
     if not text:
         progress(f" Empty response for {appid}.")
         text = "{}"
@@ -862,8 +861,6 @@ if args.cards:
     to_load.append("cards")
 if args.achievements:
     to_load.append("achievements")
-if args.gfn:
-    to_load.append("gfn")
 
 if args.extract_only:
     to_load = []
